@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  url: 'https://matisestudio.com/api/',
+  url: 'https://api.matisestudio.com/',
   appName: 'Dashboard',
 };
