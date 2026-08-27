@@ -1,37 +1,73 @@
-name: Build and Deploy web application
+name: Deploy Web (Angular Frontend) to Hostinger
 
 on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   build-and-deploy:
+    name: Build & Deploy Web Frontend
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
-    - name: Build Angular Project
-      run: npm run build:prod
+      - name: Build Production Bundle
+        run: npm run build:prod
 
-    - name: Deploy to Hostinger via SFTP (SSH)
-      uses: easingthemes/ssh-deploy@v5.1.0
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        REMOTE_HOST: ${{ secrets.SSH_HOST }}
-        REMOTE_USER: ${{ secrets.SSH_USER }}
-        REMOTE_PORT: ${{ secrets.SSH_PORT || '65002' }} # Usa el puerto secreto o por defecto el 65002 de Hostinger
-        TARGET: ${{ secrets.SSH_TARGET || '/' }}
-        SOURCE: dist/web/browser/
-        ARGS: "-rlgoDzvc --delete --exclude=prueba --exclude=dashboard --exclude=quizes --exclude=app --exclude=licencias"
+      - name: Package Browser Build Contents
+        run: |
+          cd dist/web/browser
+          tar -czf /tmp/web-dist.tar.gz .
+          mv /tmp/web-dist.tar.gz ../../../web-dist.tar.gz
+
+      - name: Ensure Target Directory Exists on Hostinger
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST || '195.35.39.62' }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT || '65002' }}
+          username: ${{ secrets.HOSTINGER_SSH_USER || 'u111559603' }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY || secrets.SSH_KEY }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          script: |
+            TARGET="${{ secrets.WEB_TARGET_DIR || '/home/u111559603/domains/tudominio.com/public_html' }}"
+            mkdir -p "$TARGET"
+
+      - name: Upload Package Archive via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST || '195.35.39.62' }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT || '65002' }}
+          username: ${{ secrets.HOSTINGER_SSH_USER || 'u111559603' }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY || secrets.SSH_KEY }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          source: "web-dist.tar.gz"
+          target: "${{ secrets.WEB_TARGET_DIR || '/home/u111559603/domains/tudominio.com/public_html' }}"
+          timeout: 120s
+
+      - name: Extract Build Package on Hostinger
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST || '195.35.39.62' }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT || '65002' }}
+          username: ${{ secrets.HOSTINGER_SSH_USER || 'u111559603' }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY || secrets.SSH_KEY }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          script: |
+            TARGET="${{ secrets.WEB_TARGET_DIR || '/home/u111559603/domains/tudominio.com/public_html' }}"
+            cd "$TARGET"
+            tar -xzf web-dist.tar.gz
+            rm -f web-dist.tar.gz
+            echo "✅ ¡Web Frontend desplegado con éxito en $TARGET!"
