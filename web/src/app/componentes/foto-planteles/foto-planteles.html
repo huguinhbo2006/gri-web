@@ -1,0 +1,19 @@
+<div class="container my-5 p-4 border rounded shadow-sm bg-white">
+  <h3 class="text-primary border-bottom pb-2">{{ titulo || 'foto-planteles' }}</h3>
+  <div class="mt-3">
+    <p class="lead text-secondary" *ngIf="descripcion">{{ descripcion }}</p>
+    <p class="lead text-secondary" *ngIf="texto">{{ texto }}</p>
+    <div *ngIf="imagenUrl" class="text-center my-3">
+      <img [src]="imagenUrl" class="img-fluid rounded shadow" style="max-height: 400px;">
+    </div>
+    <div class="row g-2 mt-2" *ngIf="getParsed(faqsJson || opinionesJson || fotosJson || itemsJson || profesoresJson || testimoniosJson || enlacesJson || categoriasJson || modalidadesJson || imagenesJson || archivosJson).length">
+      <div class="col-12">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of getParsed(faqsJson || opinionesJson || fotosJson || itemsJson || profesoresJson || testimoniosJson || enlacesJson || categoriasJson || modalidadesJson || imagenesJson || archivosJson)">
+            {{ item.nombre || item.pregunta || item.texto || item.numero || item.etiqueta }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

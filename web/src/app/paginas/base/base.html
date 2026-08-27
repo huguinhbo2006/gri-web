@@ -1,0 +1,217 @@
+<div class="container py-4">
+  <div class="row">
+    <div *ngFor="let el of elements" [class]="'col-12 col-md-' + (el.col || 12)">
+      <app-ejemplo *ngIf="el.type === 'ejemplo'"
+                   [titulo]="el.props.titulo"
+                   [contenido]="el.props.contenido">
+      </app-ejemplo>
+
+      <app-imagen-texto *ngIf="el.type === 'imagen-texto'"
+                        [titulo]="el.props.titulo"
+                        [contenido]="el.props.contenido"
+                        [imagenUrl]="el.props.imagenUrl"
+                        [alineacion]="el.props.alineacion">
+      </app-imagen-texto>
+      <app-banner *ngIf="el.type === 'banner'"
+                   [titulo]="el.props.titulo"
+                   [subtitulo]="el.props.subtitulo"
+                   [imagenUrl]="el.props.imagenUrl"
+                   [botonTexto]="el.props.botonTexto"
+                   [botonLink]="el.props.botonLink"
+>
+      </app-banner>
+
+      <app-hero *ngIf="el.type === 'hero'"
+                   [titulo]="el.props.titulo"
+                   [subtitulo]="el.props.subtitulo"
+                   [imagenUrl]="el.props.imagenUrl"
+                   [botonTexto]="el.props.botonTexto"
+                   [botonLink]="el.props.botonLink"
+>
+      </app-hero>
+
+      <app-simulador *ngIf="el.type === 'simulador'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+                   [urlExamen]="el.props.urlExamen"
+>
+      </app-simulador>
+
+      <app-cursos-udg *ngIf="el.type === 'cursos-udg'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+>
+      </app-cursos-udg>
+
+      <app-muro-opiniones *ngIf="el.type === 'muro-opiniones'"
+                   [titulo]="el.props.titulo"
+                   [opinionesJson]="el.props.opinionesJson"
+>
+      </app-muro-opiniones>
+
+      <app-badge-flotante *ngIf="el.type === 'badge-flotante'"
+                   [texto]="el.props.texto"
+                   [link]="el.props.link"
+                   [icono]="el.props.icono"
+>
+      </app-badge-flotante>
+
+      <app-whatsapp *ngIf="el.type === 'whatsapp'"
+                   [telefono]="el.props.telefono"
+                   [mensajePredefinido]="el.props.mensajePredefinido"
+>
+      </app-whatsapp>
+
+      <app-faq *ngIf="el.type === 'faq'"
+                   [titulo]="el.props.titulo"
+                   [faqsJson]="el.props.faqsJson"
+>
+      </app-faq>
+
+      <app-foto-planteles *ngIf="el.type === 'foto-planteles'"
+                   [titulo]="el.props.titulo"
+                   [fotosJson]="el.props.fotosJson"
+>
+      </app-foto-planteles>
+
+      <app-mensaje *ngIf="el.type === 'mensaje'"
+                   [titulo]="el.props.titulo"
+                   [texto]="el.props.texto"
+>
+      </app-mensaje>
+
+      <app-numeros *ngIf="el.type === 'numeros'"
+                   [titulo]="el.props.titulo"
+                   [itemsJson]="el.props.itemsJson"
+>
+      </app-numeros>
+
+      <app-profesores *ngIf="el.type === 'profesores'"
+                   [titulo]="el.props.titulo"
+                   [profesoresJson]="el.props.profesoresJson"
+>
+      </app-profesores>
+
+      <app-testimonios *ngIf="el.type === 'testimonios'"
+                   [titulo]="el.props.titulo"
+                   [testimoniosJson]="el.props.testimoniosJson"
+>
+      </app-testimonios>
+
+      <app-menu *ngIf="el.type === 'menu'"
+                   [logoUrl]="el.props.logoUrl"
+                   [enlacesJson]="el.props.enlacesJson"
+>
+      </app-menu>
+
+      <app-cursos *ngIf="el.type === 'cursos'"
+                   [titulo]="el.props.titulo"
+                   [categoria]="el.props.categoria"
+>
+      </app-cursos>
+
+      <app-streaming *ngIf="el.type === 'streaming'"
+                   [titulo]="el.props.titulo"
+                   [youtubeUrl]="el.props.youtubeUrl"
+>
+      </app-streaming>
+
+      <app-experiencia-evento *ngIf="el.type === 'experiencia-evento'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+                   [videoUrl]="el.props.videoUrl"
+>
+      </app-experiencia-evento>
+
+      <app-categorias *ngIf="el.type === 'categorias'"
+                   [titulo]="el.props.titulo"
+                   [categoriasJson]="el.props.categoriasJson"
+>
+      </app-categorias>
+
+      <app-modalidades *ngIf="el.type === 'modalidades'"
+                   [titulo]="el.props.titulo"
+                   [modalidadesJson]="el.props.modalidadesJson"
+>
+      </app-modalidades>
+
+      <app-minibanner *ngIf="el.type === 'minibanner'"
+                   [texto]="el.props.texto"
+                   [colorFondo]="el.props.colorFondo"
+>
+      </app-minibanner>
+
+      <app-galeria-carrusel *ngIf="el.type === 'galeria-carrusel'"
+                   [titulo]="el.props.titulo"
+                   [imagenesJson]="el.props.imagenesJson"
+>
+      </app-galeria-carrusel>
+
+      <app-video-texto *ngIf="el.type === 'video-texto'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+                   [videoUrl]="el.props.videoUrl"
+                   [alineacion]="el.props.alineacion"
+>
+      </app-video-texto>
+
+      <app-tabla-admitidos *ngIf="el.type === 'tabla-admitidos'"
+                   [titulo]="el.props.titulo"
+                   [ciclo]="el.props.ciclo"
+>
+      </app-tabla-admitidos>
+
+      <app-kommo-form *ngIf="el.type === 'kommo-form'"
+                   [titulo]="el.props.titulo"
+                   [formId]="el.props.formId"
+                   [scriptUrl]="el.props.scriptUrl"
+>
+      </app-kommo-form>
+
+      <app-banner-descripcion *ngIf="el.type === 'banner-descripcion'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+                   [imagenUrl]="el.props.imagenUrl"
+>
+      </app-banner-descripcion>
+
+      <app-imagen *ngIf="el.type === 'imagen'"
+                   [imagenUrl]="el.props.imagenUrl"
+                   [alto]="el.props.alto"
+                   [ancho]="el.props.ancho"
+>
+      </app-imagen>
+
+      <app-documentos-pdf *ngIf="el.type === 'documentos-pdf'"
+                   [titulo]="el.props.titulo"
+                   [archivosJson]="el.props.archivosJson"
+>
+      </app-documentos-pdf>
+
+      <app-tabla-carreras *ngIf="el.type === 'tabla-carreras'"
+                   [titulo]="el.props.titulo"
+>
+      </app-tabla-carreras>
+
+      <app-form-imagen *ngIf="el.type === 'form-imagen'"
+                   [titulo]="el.props.titulo"
+                   [imagenUrl]="el.props.imagenUrl"
+                   [formId]="el.props.formId"
+>
+      </app-form-imagen>
+
+      <app-espacio-menu *ngIf="el.type === 'espacio-menu'"
+                   [alto]="el.props.alto"
+>
+      </app-espacio-menu>
+
+      <app-examen-gratis *ngIf="el.type === 'examen-gratis'"
+                   [titulo]="el.props.titulo"
+                   [descripcion]="el.props.descripcion"
+                   [duracionMinutos]="el.props.duracionMinutos"
+>
+      </app-examen-gratis>
+
+    </div>
+  </div>
+</div>

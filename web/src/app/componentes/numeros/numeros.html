@@ -1,0 +1,11 @@
+<div class="bg-primary text-white py-5 my-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-5">{{ titulo }}</h2>
+    <div class="row text-center g-4">
+      <div class="col-md-4" *ngFor="let item of getParsed(itemsJson)">
+        <h1 class="display-3 fw-bold">{{ item.numero }}</h1>
+        <p class="lead mb-0 text-light">{{ item.etiqueta }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="p-5 text-center bg-image rounded-3 shadow-lg my-4" [style.background-image]="'url(' + imagenUrl + ')'" style="background-size: cover; background-position: center; min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(0,0,0,0.5); background-blend-mode: overlay;">
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold text-white mb-3">{{ titulo }}</h1>
+    <p class="col-lg-8 mx-auto lead text-light mb-4">{{ subtitulo || descripcion }}</p>
+    <a *ngIf="botonTexto" [href]="botonLink" class="btn btn-primary btn-lg px-4 gap-3">{{ botonTexto }}</a>
+  </div>
+</div>
